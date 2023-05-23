@@ -1,0 +1,158 @@
+*::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: #121212;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: purple;
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar-corner {
+    background-color: black;
+    cursor: pointer;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+    color: white;
+}
+
+.displayFlex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexRow {
+    flex-direction: row;
+}
+
+.flexColumn {
+    flex-direction: column;
+}
+
+body {
+    background: #ff00cc;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #333399, #ff00cc);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #333399, #ff00cc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.header {
+    gap: 10px;
+    background-color: #121212;
+    height: 55px;
+    justify-content: space-between;
+}
+
+.header #logoHeader {
+    width: 110px;
+}
+
+.nav {
+    padding-right: 20px;
+}
+
+.nav .ul {
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.nav .ul li{
+    list-style: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.nav .ul .run {
+    width: 80px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 6px;
+    background: #ff00cc;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #333399, #ff00cc);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #333399, #ff00cc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: white;
+}
+
+.ide {
+    margin-top: 5px;
+    justify-content: start;
+    gap: 5px;
+}
+
+.ide .codeEditor {
+    outline: none;
+    border: none;
+    font-size: 23px;
+    background-color: #121212;
+    padding: 10px;
+    height: 100%;
+    width: auto;
+    resize: horizontal;
+    overflow: auto;
+    border-top-right-radius: 5px;
+}
+
+.ide .console {
+    flex: auto;
+    height: 100%;
+    gap: 5px;
+}
+
+.ide .console .outputProgram {
+    padding: 10px;
+    width: 100%;
+    height: auto;
+    resize: vertical;
+    overflow: auto;
+    background-color: #050505;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    font-size: 23px;
+}
+
+.ide .console .memoryView {
+    font-size: 23px;
+    padding: 10px;
+    width: 100%;
+    flex: auto;
+    background-color: #121212;
+    border-top-left-radius: 5px;
+}
+
+@media screen and (max-width: 732px){
+    .ide {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 0;
+        padding: 5px;
+    }
+    .ide .codeEditor {
+        border-radius: 5px;
+        resize: none;
+        overflow: auto;
+        max-height: 500px;
+        flex: auto;
+    }
+    .ide .console .outputProgram {
+        border-radius: 5px;
+    }
+    .ide .console .memoryView {
+        border-radius: 5px;
+    }
+    .header .nav {
+        padding: 5px;
+    }
+    .notRun {
+        display: none;
+    }
+}
