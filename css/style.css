@@ -40,9 +40,12 @@
 }
 
 body {
-    background: #ff00cc;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #333399, #ff00cc);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #333399, #ff00cc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #ff00cc;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #333399, #ff00cc);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #333399, #ff00cc);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
 
@@ -66,7 +69,7 @@ body {
     gap: 25px;
 }
 
-.nav .ul li{
+.nav .ul li {
     list-style: none;
     font-size: 20px;
     cursor: pointer;
@@ -77,9 +80,12 @@ body {
     text-align: center;
     padding: 10px;
     border-radius: 6px;
-    background: #ff00cc;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #333399, #ff00cc);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #333399, #ff00cc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #ff00cc;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #333399, #ff00cc);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #333399, #ff00cc);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     color: white;
 }
 
@@ -127,15 +133,31 @@ body {
     flex: auto;
     background-color: #121212;
     border-top-left-radius: 5px;
+    justify-content: start;
+    gap: 30px;
+    overflow: auto;
 }
 
-@media screen and (max-width: 732px){
+.ide .console .memoryView .memory {
+    justify-content: start;
+    flex-wrap: wrap;
+}
+
+.ide .console .memoryView .memory .memoryCell {
+    padding: 20px;
+    margin: 3px;
+    border: 3px solid white;
+    border-radius: 3px;
+}
+
+@media screen and (max-width: 732px) {
     .ide {
         flex-wrap: wrap;
         justify-content: center;
         margin-top: 0;
         padding: 5px;
     }
+
     .ide .codeEditor {
         border-radius: 5px;
         resize: none;
@@ -143,15 +165,19 @@ body {
         max-height: 500px;
         flex: auto;
     }
+
     .ide .console .outputProgram {
         border-radius: 5px;
     }
+
     .ide .console .memoryView {
         border-radius: 5px;
     }
+
     .header .nav {
         padding: 5px;
     }
+
     .notRun {
         display: none;
     }
