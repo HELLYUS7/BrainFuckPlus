@@ -6,7 +6,7 @@ function adjustDivHeight() {
 adjustDivHeight();
 window.addEventListener('resize', adjustDivHeight);
 
-function buildMemory(lenght = 7) {
+function buildMemory(lenght = 0) {
     const memory = document.getElementById('memory');
     for (i = 0; i <= lenght; i++) {
         memory.innerHTML += `<span class="memoryCell" id="${i}">00</span>`;
