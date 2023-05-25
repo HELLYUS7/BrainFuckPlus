@@ -130,7 +130,7 @@ class Interpreter {
                 break;
             }
             cursorCounter++;
-        },250);
+        },200);
     }
 }
 
