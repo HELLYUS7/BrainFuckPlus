@@ -123,7 +123,7 @@ class Interpreter {
                     changeDataOfMemoryCell(adressMemory, memory[adressMemory]);
                 break;
                 case '.':
-                    consoleOutput.innerHTML += `${String.fromCharCode(memory[adressMemory])}<br>`;
+                    consoleOutput.innerHTML += `${String.fromCharCode(memory[adressMemory])}`;
                 break;
                 case '~':
                     buffer += String.fromCharCode(memory[adressMemory]);
