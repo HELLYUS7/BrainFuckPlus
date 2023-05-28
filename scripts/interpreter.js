@@ -137,5 +137,5 @@ class Interpreter {
 }
 
 let interpreter = new Interpreter();
-delayInput.addEventListener('input', () => {interpreter.delayPerCycle = delayInput.value;console.log(interpreter.delayPerCycle);});
+delayInput.addEventListener('input', () => interpreter.delayPerCycle = parseInt(delayInput.value));
 btRun.addEventListener('click', () => interpreter.execute());
