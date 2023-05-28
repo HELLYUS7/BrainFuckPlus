@@ -41,12 +41,8 @@
 
 body {
     background: #ff00cc;
-    /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #333399, #ff00cc);
-    /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #333399, #ff00cc);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
 }
 
 .header {
@@ -76,6 +72,7 @@ body {
 }
 
 .nav .ul .run {
+    align-items: end;
     width: 80px;
     text-align: center;
     padding: 10px;
@@ -127,7 +124,7 @@ body {
     font-size: 23px;
 }
 
-.ide .console .memoryView {
+.ide .console .utilities {
     font-size: 23px;
     padding: 10px;
     width: 100%;
@@ -137,15 +134,62 @@ body {
     justify-content: start;
     gap: 30px;
     overflow: auto;
+    flex-wrap: wrap;
 }
 
-.ide .console .memoryView .memory {
+.ide .console .utilities .controlls {
+    flex: 1;
+    min-width: 100px;
+    height: 100%;
+    border-right: solid #7119cf 3px;
+}
+
+.ide .console .utilities .controlls .title {
+    margin-bottom: 14px;
+}
+
+.ide .console .utilities .controlls .containerController {
+    width: 90%;
+    background-color: #181818;
+    gap: 10px;
+    padding: 5px;
+    border-radius: 5px;
     justify-content: start;
     flex-wrap: wrap;
 }
 
-.ide .console .memoryView .memory .memoryCell {
-    padding: 20px;
+.ide .console .utilities .controlls .containerController input{
+    padding: 3px;
+    appearance: none;
+    background: #050505;
+    font-size: 18px;
+    height: 30px;
+    width: 70px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+
+
+.ide .console .utilities .memoryView {
+    justify-content: start;
+    align-items: start;
+    height: 100%;
+    max-height: 60vh;
+    min-width: 100px;
+    max-width: 30vw;
+    flex: 1.9;
+    gap: 10px;
+    overflow: auto;
+}
+
+.ide .console .utilities .memoryView .memory {
+    justify-content: start;
+    flex-wrap: wrap;
+}
+
+.ide .console .utilities .memoryView .memory .memoryCell {
+    padding: 10px;
     margin: 3px;
     border: 3px solid white;
     border-radius: 3px;
@@ -167,11 +211,22 @@ body {
         flex: auto;
     }
 
+    .ide .console .utilities {
+        flex-direction: column;
+    }
+
+    .ide .console .utilities .controlls {
+        flex: 0;
+        width: 100%;
+        border: none;
+    }
+
     .ide .console .outputProgram {
         border-radius: 5px;
     }
 
-    .ide .console .memoryView {
+    .ide .console .utilities .memoryView {
+        max-width: none;
         border-radius: 5px;
     }
 

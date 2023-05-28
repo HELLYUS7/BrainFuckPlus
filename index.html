@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="scripts/script.js" defer></script>
     <script src="scripts/interpreter.js" defer></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <title>BrainFuck++</title>
 </head>
 
@@ -19,20 +21,26 @@
                 <li class="notRun">Docs</li>
                 <li class="notRun">Format</li>
                 <li class="notRun">Step</li>
-                <li class="run" id="btRun">Run</li>
+                <li class="run displayFlex" id="btRun">Run<ion-icon name="play"></ion-icon></li>
             </ul>
         </nav>
     </header>
     <section class="ide displayFlex flexRow">
         <textarea class="codeEditor" id="codeEditor">Your code here!</textarea>
         <div class="console displayFlex flexColumn">
-            <div class="outputProgram">
-                <p>Output Program:</p>
-                <span id="consoleOutput"></span>
-            </div>
-            <div class="memoryView displayFlex flexColumn">
-                <p>Memory View</p>
-                <div class="memory displayFlex flexRow" id="memory">
+            <textarea disabled="true" class="outputProgram" id="consoleOutput"></textarea>
+            <div class="utilities displayFlex flexRow">
+                <div class="controlls">
+                    <p class="title">Controlls</p>
+                    <div class="containerController displayFlex flexRow">
+                        <p>Delay(ms):</p>
+                        <input type="number" min="0" max="5000" value="0" id="delayInput">
+                    </div>
+                </div>
+                <div class="memoryView displayFlex flexColumn">
+                    <p>Memory View</p>
+                    <div class="memory displayFlex flexRow" id="memory">
+                    </div>
                 </div>
             </div>
         </div>

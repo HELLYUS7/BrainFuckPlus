@@ -2,11 +2,13 @@ const btRun = document.getElementById('btRun');
 const memory = document.getElementById('memory');
 const codeEditor = document.getElementById('codeEditor');
 const consoleOutput = document.getElementById('consoleOutput');
+const delayInput = document.getElementById('delayInput');
 
 class Interpreter {
     constructor() {
         this.tokens = { 'loops': {}, 'numbers': {}, 'func': {} };
         this.code = '';
+        this.delayPerCycle = 0;
     }
 
     addMemoryCell() {
@@ -130,9 +132,10 @@ class Interpreter {
                 break;
             }
             cursorCounter++;
-        },5);
+        },this.delayPerCycle);
     }
 }
 
 let interpreter = new Interpreter();
+delayInput.addEventListener('input', () => {interpreter.delayPerCycle = delayInput.value;console.log(interpreter.delayPerCycle);});
 btRun.addEventListener('click', () => interpreter.execute());
