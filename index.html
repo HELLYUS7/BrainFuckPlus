@@ -27,9 +27,9 @@
         </nav>
     </header>
     <section class="ide displayFlex flexRow">
-        <textarea class="codeEditor" id="codeEditor">Your code here!</textarea>
+        <textarea placeholder="Your code here!" class="codeEditor" id="codeEditor"></textarea>
         <div class="console displayFlex flexColumn">
-            <textarea disabled="true" class="outputProgram" id="consoleOutput"></textarea>
+            <textarea placeholder="Output program:" disabled="true" class="outputProgram" id="consoleOutput"></textarea>
             <div class="utilities displayFlex flexRow">
                 <div class="controlls">
                     <p class="title">Controlls</p>
@@ -47,7 +47,14 @@
         </div>
     </section>
     <div class="console-window displayFlex flexColumn" id="console-window">
-        <div class="header-windows"></div>
+        <div class="header-windows displayFlex flexRow">
+            <nav class="options-header displayFlex flexRow">
+                <ion-icon name="close-circle" class="close"></ion-icon>
+                <ion-icon name="scan-circle" class="full"></ion-icon>
+            </nav>
+            <span>Console</span>
+        </div>
+        <textarea placeholder="Output program:" disabled="true" class="outputProgram" id="consoleOutput"></textarea>
     </div>
 </body>
 

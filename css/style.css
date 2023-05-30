@@ -198,13 +198,67 @@ body {
 /*Este é o código de estilo da janela do console*/
 
 .header-windows {
-    top: 0;
     left: 0;
+    top: 0;
     position: absolute;
     width: 100%;
-    height: 30px;
+    height: 45px;
+    justify-content: space-between;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 15px;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
+    border-bottom: 1px solid transparent;
+    background: #0f0f0f;
+}
+
+.header-windows nav {
+    border-radius: 5px;
+    font-size: 27px;
+    gap: 5px;
+}
+
+.header-windows nav .close {
+    color: rgb(211, 39, 39);
+    transition: 0.2s;
+}
+
+.header-windows nav .close:hover {
+    color: white;
+}
+
+.header-windows nav .full {
+    color: rgb(207, 213, 22);
+    transition: 0.2s;
+}
+
+.header-windows nav .full:hover {
+    color: white;
+}
+
+.header-windows span {
+    font-size: 15px;
+    color: #eeeeee;
+    padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+}
+
+.console-window {
+    position: fixed;
+    top: 200px;
+    left: 200px;
+    padding-top: 48px;
+    justify-content: start;
+    width: 100px;
+    height: 100px;
+    min-width: 400px;
+    min-height: 300px;
+    resize: both;
+    overflow: auto;
+    border-radius: 10px;
     background: #ff00cc;
     /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #333399, #ff00cc);
@@ -213,17 +267,16 @@ body {
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.console-window {
-    position: fixed;
-    top: 0;
-    width: 100px;
-    height: 100px;
-    resize: both;
-    overflow: auto;
-    border-radius: 10px;
-    background-color: black;
+.console-window .outputProgram {
+    padding: 10px;
+    width: 100%;
+    height: 90%;
+    resize: none;
+    outline: none;
+    border: none;
+    background-color: #050505;
+    font-size: 23px;
 }
-
 
 @media screen and (max-width: 732px) {
     .ide {

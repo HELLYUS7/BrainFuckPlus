@@ -1,7 +1,7 @@
 const btRun = document.getElementById('btRun');
 const memory = document.getElementById('memory');
 const codeEditor = document.getElementById('codeEditor');
-const consoleOutput = document.getElementById('consoleOutput');
+const consoleOutput = document.querySelectorAll('#consoleOutput');
 const delayInput = document.getElementById('delayInput');
 
 class Interpreter {
@@ -51,7 +51,7 @@ class Interpreter {
         let buffer = '';
         let memory = [0];
 
-        consoleOutput.innerHTML = '';
+        consoleOutput.forEach((value) => value.innerHTML = '');
 
         const deleteAllMemoryCells = () => {
             const memoryCells = document.querySelectorAll('.memoryCell');
@@ -81,7 +81,11 @@ class Interpreter {
                     value.innerHTML = data;
                 }
         });
-    }
+        }
+        
+        function printCaractereInConsole(caractere){
+            consoleOutput.forEach((value) => value.innerHTML += caractere);
+        }
 
         const interval = setInterval(() =>{
             if(cursorCounter == this.code.length) clearInterval(interval);
@@ -125,7 +129,7 @@ class Interpreter {
                     changeDataOfMemoryCell(adressMemory, memory[adressMemory]);
                 break;
                 case '.':
-                    consoleOutput.innerHTML += `${String.fromCharCode(memory[adressMemory])}`;
+                    printCaractereInConsole(String.fromCharCode(memory[adressMemory]));
                 break;
                 case '~':
                     buffer += String.fromCharCode(memory[adressMemory]);

@@ -38,3 +38,5 @@ class DaggrableWindow {
 }
 
 const window1 = new DaggrableWindow(document.getElementById('console-window'));
+const window2 = new DaggrableWindow(document.getElementById('console-window-abc'));
+const window3 = new DaggrableWindow(document.getElementById('console-window-123'));
