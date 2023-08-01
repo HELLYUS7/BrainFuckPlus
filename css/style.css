@@ -73,7 +73,7 @@ body {
 
 .nav .ul .run {
     align-items: end;
-    width: 80px;
+
     text-align: center;
     padding: 10px;
     border-radius: 6px;
@@ -84,6 +84,11 @@ body {
     background: linear-gradient(to right, #333399, #ff00cc);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     color: white;
+}
+
+.nav .ul .run:hover {
+    background: white;
+    color: #050505;
 }
 
 .ide {
@@ -124,6 +129,16 @@ body {
     font-size: 23px;
 }
 
+.keyboardInput {
+    padding: 5px;
+    font-size: 20px;
+    background-color: #050505;
+    outline-style: none;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+}
+
 .ide .console .utilities {
     font-size: 23px;
     padding: 10px;
@@ -156,6 +171,7 @@ body {
     border-radius: 5px;
     justify-content: start;
     flex-wrap: wrap;
+    margin-bottom: 10px;
 }
 
 .ide .console .utilities .controlls .containerController input {
@@ -220,7 +236,8 @@ body {
 }
 
 .header-windows nav .close {
-    color: rgb(211, 39, 39);
+    color: rgb(255, 0, 0);
+    font-size: 29px;
     transition: 0.2s;
 }
 
@@ -229,7 +246,8 @@ body {
 }
 
 .header-windows nav .full {
-    color: rgb(207, 213, 22);
+    color: rgb(0, 255, 229);
+    font-size: 23px;
     transition: 0.2s;
 }
 
@@ -237,9 +255,9 @@ body {
     color: white;
 }
 
-.header-windows span {
-    font-size: 15px;
-    color: #eeeeee;
+.header-windows .terminalLogo {
+    font-size: 26px;
+    color: #ffffff;
     padding: 3px;
     padding-left: 10px;
     padding-right: 10px;
@@ -276,6 +294,10 @@ body {
     border: none;
     background-color: #050505;
     font-size: 23px;
+}
+
+.margin-top-keyboard {
+    margin-top: 3px;
 }
 
 @media screen and (max-width: 732px) {

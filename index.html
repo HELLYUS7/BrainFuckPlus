@@ -22,7 +22,8 @@
                 <li class="notRun">Docs</li>
                 <li class="notRun">Format</li>
                 <li class="notRun">Step</li>
-                <li class="run displayFlex" id="btRun">Run<ion-icon name="play"></ion-icon></li>
+                <li class="run compile displayFlex" id="btCompile">Compile</li>
+                <li class="run displayFlex" id="btRun">Run</li>
             </ul>
         </nav>
     </header>
@@ -30,9 +31,14 @@
         <textarea placeholder="Your code here!" class="codeEditor" id="codeEditor"></textarea>
         <div class="console displayFlex flexColumn">
             <textarea placeholder="Output program:" disabled="true" class="outputProgram" id="consoleOutput"></textarea>
+            <input type="text" placeholder="->" class="keyboardInput">
             <div class="utilities displayFlex flexRow">
                 <div class="controlls">
                     <p class="title">Controlls</p>
+                    <div class="containerController displayFlex flexRow">
+                        <p>RAM Size(bytes):</p>
+                        <input type="number" min="0" max="5000" value="255" id="ramSizeInput">
+                    </div>
                     <div class="containerController displayFlex flexRow">
                         <p>Delay(ms):</p>
                         <input type="number" min="0" max="5000" value="0" id="delayInput">
@@ -49,12 +55,14 @@
     <div class="console-window displayFlex flexColumn" id="console-window">
         <div class="header-windows displayFlex flexRow">
             <nav class="options-header displayFlex flexRow">
-                <ion-icon name="close-circle" class="close"></ion-icon>
-                <ion-icon name="scan-circle" class="full"></ion-icon>
+                <ion-icon name="close" class="close"></ion-icon>
+                <ion-icon name="resize" class="full"></ion-icon>
             </nav>
-            <span>Console</span>
+            <ion-icon name="terminal" class="terminalLogo"></ion-icon>
+
         </div>
         <textarea placeholder="Output program:" disabled="true" class="outputProgram" id="consoleOutput"></textarea>
+        <input type="text" placeholder="->" class="keyboardInput margin-top-keyboard">
     </div>
 </body>
 

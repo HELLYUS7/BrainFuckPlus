@@ -1,7 +1,9 @@
 const btRun = document.getElementById('btRun');
+const btCompile = document.getElementById('btCompile');
 const memory = document.getElementById('memory');
 const codeEditor = document.getElementById('codeEditor');
 const consoleOutput = document.querySelectorAll('#consoleOutput');
+const ramSizeInput = document.getElementById('ramSizeInput');
 const delayInput = document.getElementById('delayInput');
 
 class Interpreter {
@@ -27,11 +29,11 @@ class Interpreter {
         let cursorCounter = 0;
         let opcode = '';
 
-        while(cursorCounter <= this.code.length) {
+        while (cursorCounter <= this.code.length) {
             opcode = this.code[cursorCounter];
-            if(opcode === '[') {
+            if (opcode === '[') {
                 simpleForwardLoops.push(cursorCounter);
-            }else if(opcode === ']') {
+            } else if (opcode === ']') {
                 targetReturn = simpleForwardLoops.pop();
                 simpleBackwardLoops[targetReturn] = cursorCounter;
                 simpleBackwardLoops[cursorCounter] = targetReturn;
@@ -43,6 +45,7 @@ class Interpreter {
     }
 
     execute() {
+
         let simpleLoopsInOut = this.mapCode();
         let cursorCounter = 0;
         let adressMemory = 0;
@@ -66,9 +69,9 @@ class Interpreter {
         function changeBackgroundOfMemoryCell(index, color) {
             const memoryCells = document.querySelectorAll('.memoryCell');
             memoryCells.forEach((value, i) => {
-                if(i == index) {
+                if (i == index) {
                     value.style.backgroundColor = color;
-                }else{
+                } else {
                     value.style.backgroundColor = 'transparent';
                 }
             });
@@ -77,66 +80,66 @@ class Interpreter {
         function changeDataOfMemoryCell(index, data) {
             const memoryCells = document.querySelectorAll('.memoryCell');
             memoryCells.forEach((value, i) => {
-                if(i == index) {
+                if (i == index) {
                     value.innerHTML = data;
                 }
-        });
+            });
         }
-        
-        function printCaractereInConsole(caractere){
+
+        function printCaractereInConsole(caractere) {
             consoleOutput.forEach((value) => value.innerHTML += caractere);
         }
 
-        const interval = setInterval(() =>{
-            if(cursorCounter == this.code.length) clearInterval(interval);
+        const interval = setInterval(() => {
+            if (cursorCounter == this.code.length) clearInterval(interval);
             console.log(memory);
             opcode = this.code[cursorCounter];
-            switch(opcode){
+            switch (opcode) {
                 case '>':
                     adressMemory++;
-                    if(adressMemory >= memory.length){
+                    if (adressMemory >= memory.length) {
                         memory.push(0);
                         this.addMemoryCell();
                     }
-                    changeBackgroundOfMemoryCell(adressMemory,'purple')
-                break;
+                    changeBackgroundOfMemoryCell(adressMemory, 'purple')
+                    break;
                 case '<':
                     adressMemory--;
-                    changeBackgroundOfMemoryCell(adressMemory,'purple')
-                break;
+                    changeBackgroundOfMemoryCell(adressMemory, 'purple')
+                    break;
                 case '+':
                     memory[adressMemory]++;
                     changeDataOfMemoryCell(adressMemory, memory[adressMemory]);
-                break;
+                    break;
                 case '-':
                     memory[adressMemory]--;
                     changeDataOfMemoryCell(adressMemory, memory[adressMemory]);
-                break;
+                    break;
                 case '[':
                     console.log('In Looop')
-                    if(memory[adressMemory] == 0) {
+                    if (memory[adressMemory] == 0) {
                         cursorCounter = simpleLoopsInOut[cursorCounter];
                     }
-                break;
+                    break;
                 case ']':
-                    if(memory[adressMemory] != 0) {
+                    if (memory[adressMemory] != 0) {
                         cursorCounter = simpleLoopsInOut[cursorCounter];
                     }
-                break;
+                    break;
                 case ',':
                     inputUser = prompt('Entrada de caractere para ASCII:');
                     memory[adressMemory] = inputUser.charCodeAt(0);
                     changeDataOfMemoryCell(adressMemory, memory[adressMemory]);
-                break;
+                    break;
                 case '.':
                     printCaractereInConsole(String.fromCharCode(memory[adressMemory]));
-                break;
+                    break;
                 case '~':
                     buffer += String.fromCharCode(memory[adressMemory]);
-                break;
+                    break;
             }
             cursorCounter++;
-        },this.delayPerCycle);
+        }, this.delayPerCycle);
     }
 }
 
