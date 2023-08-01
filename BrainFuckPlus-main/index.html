@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="scripts/script.js" defer></script>
+    <script src="scripts/interpreter.js" defer></script>
+    <script src="scripts/windows.js" defer></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <title>BrainFuck++</title>
+</head>
+
+<body>
+    <header class="header displayFlex flexRow">
+        <img src="assets/imgs/BF++.svg" alt="BF++" id="logoHeader">
+        <nav class="nav">
+            <ul class="ul displayFlex flexRow">
+                <li class="notRun">Docs</li>
+                <li class="notRun">Format</li>
+                <li class="notRun">Step</li>
+                <li class="run compile displayFlex" id="btCompile">Compile</li>
+                <li class="run displayFlex" id="btRun">Run</li>
+            </ul>
+        </nav>
+    </header>
+    <section class="ide displayFlex flexRow">
+        <textarea placeholder="Your code here!" class="codeEditor" id="codeEditor"></textarea>
+        <div class="console displayFlex flexColumn">
+            <textarea placeholder="Output program:" disabled="true" class="outputProgram" id="consoleOutput"></textarea>
+            <input type="text" placeholder="->" class="keyboardInput">
+            <div class="utilities displayFlex flexRow">
+                <div class="controlls">
+                    <p class="title">Controlls</p>
+                    <div class="containerController displayFlex flexRow">
+                        <p>RAM Size(bytes):</p>
+                        <input type="number" min="0" max="5000" value="255" id="ramSizeInput">
+                    </div>
+                    <div class="containerController displayFlex flexRow">
+                        <p>Delay(ms):</p>
+                        <input type="number" min="0" max="5000" value="0" id="delayInput">
+                    </div>
+                </div>
+                <div class="memoryView displayFlex flexColumn">
+                    <p>Memory View</p>
+                    <div class="memory displayFlex flexRow" id="memory">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="console-window displayFlex flexColumn" id="console-window">
+        <div class="header-windows displayFlex flexRow">
+            <nav class="options-header displayFlex flexRow">
+                <ion-icon name="close" class="close"></ion-icon>
+                <ion-icon name="resize" class="full"></ion-icon>
+            </nav>
+            <ion-icon name="terminal" class="terminalLogo"></ion-icon>
+
+        </div>
+        <textarea placeholder="Output program:" disabled="true" class="outputProgram" id="consoleOutput"></textarea>
+        <input type="text" placeholder="->" class="keyboardInput margin-top-keyboard">
+    </div>
+</body>
+
+</html>
