@@ -75,11 +75,8 @@ class Interpreter{
     }
 
     printOutputProgramInTerminal(text){
-        if(this.terminalNumericMode){
-            consoleOutput.forEach((value)=>value.innerHTML += text);
-        }else{
-            consoleOutput.forEach((value)=>value.innerHTML += String.fromCharCode(text));
-        }
+        consoleOutput.forEach((value)=>value.innerHTML += text);
+        
     }
 
     compileProgram(){
@@ -189,8 +186,11 @@ class Interpreter{
                 }
                 break;
                 case '.':
-                    console.log(String.fromCharCode(this.memory[this.adress]));
-                    this.printOutputProgramInTerminal(this.memory[this.adress]);
+                    if(this.terminalNumericMode){
+                        this.printOutputProgramInTerminal(this.memory[this.adress]);
+                    }else{
+                        this.printOutputProgramInTerminal(String.fromCharCode(this.memory[this.adress]));
+                    }
                 break;
                 case '!':
                     this.memory[this.adress] = 0;
@@ -228,7 +228,7 @@ class Interpreter{
                     this.terminalNumericMode = false;
                 break;
             }
-            console.log(this.memory);
+            
             
         }
 
