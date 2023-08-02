@@ -265,6 +265,9 @@ body {
 }
 
 .console-window {
+
+    display: none;
+
     position: fixed;
     top: 200px;
     left: 200px;
