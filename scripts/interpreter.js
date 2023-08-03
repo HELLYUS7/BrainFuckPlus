@@ -1,3 +1,4 @@
+// Código feito por Gabriel Pereira. Versão 2.0
 
 const btRun = document.getElementById('btRun');
 const btCompile = document.getElementById('btCompile');
@@ -33,10 +34,11 @@ class Interpreter{
     }
 
     addMemoryCell() {
-        memory.innerHTML += `<span class="memoryCell" id="${i}">00</span>`;
+        memory.innerHTML += `<span class="memoryCell" id="${i}">000</span>`;
     }
 
     buildRam(){
+        this.memory = [];
         for(let i=0;i<this.ramSize;i++){
             this.addMemoryCell();
             this.memory[i] = 0;
@@ -83,6 +85,7 @@ class Interpreter{
         this.getCode();
         this.pointerCode = 0;
         let simpleLoopsIn = [];
+        let stackLoopsIn = [];
         let opcode = '';
         if(this.code.length >= this.ramSize){
             this.compiledProgram = false;
@@ -97,17 +100,28 @@ class Interpreter{
                 switch(opcode){
                     case '[':
                         simpleLoopsIn.push(this.pointerCode);
-                    break;
+                        break;
+
                     case ']':
-                        let targetReturn = simpleLoopsIn.pop();
-                        this.metaData[this.pointerCode] = targetReturn;
-                        this.metaData[targetReturn] = this.pointerCode;
-                    break;
-                    
+                        let targetReturnSimpleLoop = simpleLoopsIn.pop();
+                        this.metaData[this.pointerCode] = targetReturnSimpleLoop;
+                        this.metaData[targetReturnSimpleLoop] = this.pointerCode;
+                        break;
+
+                    case '(':
+                        stackLoopsIn.push(this.pointerCode);
+                        break;
+
+                    case ')':
+                        let targetReturnStackLoop = stackLoopsIn.pop();
+                        this.metaData[this.pointerCode] = targetReturnStackLoop;
+                        this.metaData[targetReturnStackLoop] = this.pointerCode;
+                        break;
                 }
                 this.pointerCode++;
             }
             this.adress = this.pointerCode;
+            this.stackPointer = this.memory.length - 1;
             this.changeBackgroundOfMemoryCell(this.adress, 'purple');
             this.compiledProgram = true;
             this.printInTerminal('');
@@ -151,82 +165,145 @@ class Interpreter{
             let opcode = String.fromCharCode(this.memory[this.pointerCode]);
             switch (opcode){
                 case '>':
-                    this.adress++;
-                    this.changeBackgroundOfMemoryCell(this.adress, 'purple');
-                break;
+                    //Vai para a próxima célula da memória
+                    if((this.adress + 1) < this.ramSize){
+                        this.adress++;
+                        //console.log(this.adress);
+                        this.changeBackgroundOfMemoryCell(this.adress, 'purple');
+                    }else{
+                        this.printOutputProgramInTerminal('\nErro: Estouro de memória!');
+                        return true;
+                    }
+                    break;
+
                 case '<':
+                    //Volta para a célula anterior na memória
                     this.adress--;
                     this.changeBackgroundOfMemoryCell(this.adress, 'purple');
-                break;
+                    break;
+
                 case '+':
+                    //Soma 1 à célula atual
                     this.memory[this.adress]++;
                     this.changeDataOfMemoryCell(this.adress, this.memory[this.adress]);
-                break;
+                    break;
+
                 case '-':
+                    //Subtriai 1 da célula atual
                     this.memory[this.adress]--;
                     this.changeDataOfMemoryCell(this.adress, this.memory[this.adress]);
-                break;
+                    break;
+
                 case '[':
+                    //Loop simples da linguagem
                     if(this.memory[this.adress] == 0){
                         this.pointerCode = this.metaData[this.pointerCode];
                     }
-                break;
+                    break;
+
                 case ']':
+                    //Loop simples da linguagem
                     if(this.memory[this.adress] != 0){
                         this.pointerCode = this.metaData[this.pointerCode];
                     }
-                break;
+                    break;
+
                 case ',':
+                    //Pega um caractere do buffer de caracteres
                     let inputValue = await this.getInput();
-                if (inputValue.length > 0) {
-                    this.memory[this.adress] = inputValue.charCodeAt(0);
-                    this.changeDataOfMemoryCell(this.adress, this.memory[this.adress]);
-                    let keyboardInput = document.querySelector('.keyboardInput');
-                    keyboardInput.value = inputValue.slice(1); // Remove o primeiro caractere do input
-                }
-                break;
+                    if (inputValue.length > 0) {
+                        this.memory[this.adress] = inputValue.charCodeAt(0);
+                        this.changeDataOfMemoryCell(this.adress, this.memory[this.adress]);
+                        let keyboardInput = document.querySelector('.keyboardInput');
+                        keyboardInput.value = inputValue.slice(1); // Remove o primeiro caractere do input
+                    }
+                    break;
+
                 case '.':
+                    //Plota o valor da célula atual no terminal em formato ASCII ou numérico
                     if(this.terminalNumericMode){
                         this.printOutputProgramInTerminal(this.memory[this.adress]);
                     }else{
                         this.printOutputProgramInTerminal(String.fromCharCode(this.memory[this.adress]));
                     }
-                break;
+                    break;
+
                 case '!':
+                    //Zera o valor da célula atual
                     this.memory[this.adress] = 0;
                     this.changeDataOfMemoryCell(this.adress, this.memory[this.adress]);
-                break;
+                    break;
+
                 case '$':
+                    //Copia o valor da célula atual para o ponteiro
                     this.pointerCode = this.memory[this.adress];
                     this.adress = this.pointerCode;
                     this.changeBackgroundOfMemoryCell(this.adress, 'purple');
-                break;
+                    break;
+
                 case '#':
+                    //Copia o valor atual do ponteiro para a célula atual
                     this.memory[this.adress] = this.pointerCode;
                     this.changeDataOfMemoryCell(this.adress, this.memory[this.adress]);
-                break;
-                case '!':
-                    this.memory[this.adress] = 0;
-                    this.changeDataOfMemoryCell(this.adress, this.memory[this.adress]);
-                break;
+                    break;
+
                 case '*':
+                    //Multiplica o valor da célula atual por 2
                     this.memory[this.adress] *= 2;
                     this.changeDataOfMemoryCell(this.adress, this.memory[this.adress]);
-                break;
+                    break;
+
                 case '/':
+                    //Divide o valor da célula atual por 2
                     this.memory[this.adress] /= 2;
                     this.changeDataOfMemoryCell(this.adress, this.memory[this.adress]);
-                break;
+                    break;
+
                 case '^':
+                    //Eleva o valor da célula atual ao quadrado
                     this.memory[this.adress] **= 2;
                     this.changeDataOfMemoryCell(this.adress, this.memory[this.adress]);
-                break;
+                    break;
+
+                case '{':
+                    //Faz o pop do valor da célula atual na pilha do tipo LIFO
+                    if(this.stackPointer < this.memory.length - 1){
+                        console.log('Batman Quadrado');
+                        this.stackPointer++;
+                    }
+                    this.memory[this.adress] = this.memory[this.stackPointer];
+                    this.changeDataOfMemoryCell(this.stackPointer, '00');
+                    this.changeDataOfMemoryCell(this.adress, this.memory[this.adress]);
+                    break;
+
+                case '}':
+                    //Faz o push do valor da célula atual na pilha do tipo LIFO
+                    this.memory[this.stackPointer] = this.memory[this.adress];
+                    this.changeDataOfMemoryCell(this.stackPointer, this.memory[this.stackPointer]);
+                    this.stackPointer--;
+                    break;
+
+                case '(':
+                    if(this.memory[this.stackPointer + 1] == 0){
+                        this.pointerCode = this.metaData[this.pointerCode];
+                    }
+                    break;
+                
+                case ')':
+                    if(this.memory[this.stackPointer + 1] != 0){
+                        this.pointerCode = this.metaData[this.pointerCode];
+                    }
+                    break;
+                
                 case 'i':
+                    //Ativa o modo de impressão numérico no terminal
                     this.terminalNumericMode = true;
-                break;
+                    break;
+
                 case 'c':
+                    //Ativa o modo de impressão ASCII no terminal
                     this.terminalNumericMode = false;
-                break;
+                    break;
             }
             
             
@@ -236,11 +313,14 @@ class Interpreter{
             this.printInTerminal('');
             this.pointerCode = 0;
             while(this.pointerCode <= this.code.length && this.programRunning){
-                await this.executeProgramCycle();
+                if(await this.executeProgramCycle()){
+                    break;
+                }
                 this.pointerCode++;
                 await this.delay(this.delayPerCycle);
             }
             this.programRunning = false;
+            btRun.innerHTML = 'Run';
             this.printOutputProgramInTerminal('\nFim do programa...');
         }
 
@@ -250,6 +330,7 @@ class Interpreter{
             }else{
                 this.programRunning = true;
                 this.executeProgramLoop();
+                btRun.innerHTML = 'Stop';
             }
 
         }
@@ -266,6 +347,10 @@ class Interpreter{
 
 
 /*
+
+##################### Esta é a versão antiga do interpretador :) #####################
+
+
 class Interpreter {
     constructor() {
         this.tokens = { 'loops': {}, 'numbers': {}, 'func': {} };

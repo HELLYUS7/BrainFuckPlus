@@ -43,6 +43,20 @@ body {
     background: #ff00cc;
     background: -webkit-linear-gradient(to right, #333399, #ff00cc);
     background: linear-gradient(to right, #333399, #ff00cc);
+    background-size: 200% 100%;
+    animation: body-background-animated 3s ease-in infinite;
+}
+
+@keyframes body-background-animated {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .header {
@@ -52,7 +66,10 @@ body {
     background-color: #121212;
     height: 55px;
     justify-content: space-between;
+    
 }
+
+
 
 .header #logoHeader {
     width: 110px;
@@ -73,6 +90,10 @@ body {
     cursor: pointer;
 }
 
+.nav .ul .notRun:hover{
+    text-shadow: 2px 2px 20px white;
+}
+
 .nav .ul .run {
     align-items: end;
 
@@ -86,6 +107,7 @@ body {
     background: linear-gradient(to right, #333399, #ff00cc);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     color: white;
+    
 }
 
 .nav .ul .run:hover {
