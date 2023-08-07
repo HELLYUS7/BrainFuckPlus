@@ -312,7 +312,7 @@ class Interpreter{
         async executeProgramLoop(){
             this.printInTerminal('');
             this.pointerCode = 0;
-            while(this.pointerCode <= this.code.length && this.programRunning){
+            while(this.pointerCode < this.code.length && this.programRunning){
                 if(await this.executeProgramCycle()){
                     break;
                 }
