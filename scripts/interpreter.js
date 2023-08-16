@@ -18,6 +18,7 @@ class Interpreter{
         this.pointerCode = 0;
         this.ramSize = 255;
         this.stackPointer = 0;
+        this.condicionalPointer = 0;
         this.adress = 0;
         this.delayPerCycle = 0;
         this.compiledProgram = false;
@@ -86,6 +87,7 @@ class Interpreter{
         this.pointerCode = 0;
         let simpleLoopsIn = [];
         let stackLoopsIn = [];
+        let condicionalsTest = [];
         let opcode = '';
         if(this.code.length >= this.ramSize){
             this.compiledProgram = false;
@@ -117,11 +119,22 @@ class Interpreter{
                         this.metaData[this.pointerCode] = targetReturnStackLoop;
                         this.metaData[targetReturnStackLoop] = this.pointerCode;
                         break;
+
+                    case '?':
+                        condicionalsTest.push(this.pointerCode);
+                        break;
+                    
+                    case '|':
+                        let targetReturnCondicionals = condicionalsTest.pop();
+                        this.metaData[this.pointerCode] = targetReturnCondicionals;
+                        this.metaData[targetReturnCondicionals] = this.pointerCode;
+                        break;
                 }
                 this.pointerCode++;
             }
             this.adress = this.pointerCode;
             this.stackPointer = this.memory.length - 1;
+            this.condicionalPointer = this.stackPointer;
             this.changeBackgroundOfMemoryCell(this.adress, 'purple');
             this.compiledProgram = true;
             this.printInTerminal('');
@@ -237,13 +250,11 @@ class Interpreter{
                 case '$':
                     //Copia o valor da célula atual para o ponteiro
                     this.pointerCode = this.memory[this.adress];
-                    this.adress = this.pointerCode;
-                    this.changeBackgroundOfMemoryCell(this.adress, 'purple');
                     break;
 
                 case '#':
                     //Copia o valor atual do ponteiro para a célula atual
-                    this.memory[this.adress] = this.pointerCode;
+                    this.memory[this.adress] += this.pointerCode;
                     this.changeDataOfMemoryCell(this.adress, this.memory[this.adress]);
                     break;
 
@@ -292,6 +303,16 @@ class Interpreter{
                 case ')':
                     if(this.memory[this.stackPointer + 1] != 0){
                         this.pointerCode = this.metaData[this.pointerCode];
+                    }
+                    break;
+
+                case '~':
+                    this.condicionalPointer = (this.memory.length - 1) - this.memory[this.adress];
+                    break;
+                
+                case '?':
+                    if(this.memory[this.condicionalPointer] != this.memory[this.adress]){
+                        this.pointerCode = this.metaData[this.pointerCode];  
                     }
                     break;
                 
