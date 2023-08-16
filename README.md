@@ -25,13 +25,9 @@ Once you have set up the interpreter or compiler, follow these steps to run your
 
 ## Examples
 
-Here's a simple "Hello, World!" program in BrainFuck++:
+Here's a simple Text Editor in BrainFuck++:
 
-++++++++++[>++++++++>+++++++++++>++
-++++++++>++++>+++>++++++++>++++++++
-++++>+++++++++++>++++++++++>+++++++
-++++>+++>+<<<<<<<<<<<<-]>-.>--.>---
-.>++++.>++.>---.>---.>.>.>+.>+++.>.
+++^+*^++++>+++^[<+>-]<}!}>,?!<[<]>[.>]<[<]|>{+}!+++++^$
 
 ## Contributing
 
